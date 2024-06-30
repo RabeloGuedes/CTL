@@ -5,6 +5,8 @@ DFLAGS = -g
 FLAGS = $(WFLAGS) $(IFLAGS) $(DFLAGS)
 
 NAME = CTL.a
+
+SRCS_DIR = ./srcs/
 OBJS_DIR = ./objs/
 
 SRCS = Assert.cpp CTL.cpp Describe.cpp
@@ -15,9 +17,9 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-$(OBJS_DIR)%.o: %.cpp
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
 	mkdir -p $(OBJS_DIR)
-	$(CXX) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS_DIR)

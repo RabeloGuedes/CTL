@@ -12,6 +12,8 @@ void	Assert::execute(void) const {
 
 Assert::FalseAssert::FalseAssert(const string &it): _message("❌ "+ it) {};
 
+Assert::FalseAssert::~FalseAssert(void) throw() {}
+
 const char	*Assert::FalseAssert::what(void) const throw() {
 	return (_message.c_str());
 }

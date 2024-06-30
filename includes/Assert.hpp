@@ -15,11 +15,13 @@ class	Assert {
 		Assert(string it, bool condition);
 		~Assert(void);
 		void	execute(void) const;
+
 		class	FalseAssert: public exception {
 			private:
 				string	_message;
 			public:
 				FalseAssert(const string &it);
+				~FalseAssert(void) throw();
 				virtual const char	*what(void) const throw();
 		};
 };
