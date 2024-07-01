@@ -1,21 +1,35 @@
 #ifndef CTL_HPP
 # define CTL_HPP
 
-# include <Describe.hpp>
+# include <exception>
+# include <iostream>
+# include <map>
+# include <functional>
+# include <type_traits>
+# include <utility>
+# include <tuple>
 
-using namespace std;
+static size_t	g_tabCounter = 0;
 
-class	CTL {
-	private:
-		static size_t		_numberOfTests;
-		string				_testName;
-		vector<Describe>	_tests;
-	public:
-		CTL(void);
-		CTL(string testName);
-		~CTL(void);
-		void	addTest(Describe &newDescription);
-		void	runTests(void) const;
-};
+template <typename Func, typename... Args>
+auto describe(std::string description, Func func, Args&&... args) {
+
+	g_tabCounter += 2;
+	std::string	tabSpaces(g_tabCounter, ' ');
+    std::cout << tabSpaces << description << std::endl;
+
+    if constexpr (std::is_void_v<decltype(func(std::forward<Args>(args)...))>) {
+        func(std::forward<Args>(args)...);
+		g_tabCounter -= 2;
+		if (!g_tabCounter)
+			std::cout << std::endl;
+    } else {
+        auto response = func(std::forward<Args>(args)...);
+		g_tabCounter -= 2;
+		if (!g_tabCounter)
+			std::cout << std::endl;
+		return response;
+    }
+}
 
 #endif

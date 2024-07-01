@@ -2,14 +2,15 @@ CXX = c++
 WFLAGS = -Wall -Wextra -Werror
 IFLAGS = -Iincludes
 DFLAGS = -g
-FLAGS = $(WFLAGS) $(IFLAGS) $(DFLAGS)
+VFLAGS = -std=c++20
+FLAGS = $(WFLAGS) $(IFLAGS) $(DFLAGS) $(VFLAGS)
 
 NAME = CTL.a
 
 SRCS_DIR = ./srcs/
 OBJS_DIR = ./objs/
 
-SRCS = Assert.cpp CTL.cpp Describe.cpp
+SRCS = Assert.cpp CTL.cpp
 OBJS = $(SRCS:%.cpp=$(OBJS_DIR)%.o)
 
 all: $(NAME)
