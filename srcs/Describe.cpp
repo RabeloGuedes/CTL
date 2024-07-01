@@ -13,16 +13,18 @@ void	Describe::addAssert(Assert &newAssert) {
 }
 
 void	Describe::runAsserts(void) const {
-	cout << _description << endl << endl;
+	string	tabForDescription = string(2, ' ');
+	string	tabForAssert = string(4, ' ');
+	cout << tabForDescription << _description << endl << endl;
 	for (vector<Assert>::const_iterator it = _asserts.begin(); it != _asserts.end(); it++) {
 		try {
 			it->execute();
 		} catch (Assert::FalseAssert &error) {
-			cerr << error.what() << endl;
+			cerr << tabForAssert << error.what() << endl;
 		} catch (exception &error) {
-			cerr << error.what() << endl;
+			cerr << tabForAssert << error.what() << endl;
 		} catch (...) {
-			cerr << "Undefined error" << endl;
+			cerr << tabForAssert << "Undefined error" << endl;
 		}
 	}
 }

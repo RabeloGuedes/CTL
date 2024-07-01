@@ -7,7 +7,7 @@ Assert::~Assert(void) {}
 void	Assert::execute(void) const {
 	if (!_condition)
 		throw FalseAssert(_it);
-	cout << "✅ " << _it << endl;
+	cout << string(4 , ' ') << "✅ " << _it << endl;
 }
 
 Assert::FalseAssert::FalseAssert(const string &it): _message("❌ "+ it) {};
