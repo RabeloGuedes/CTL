@@ -1,8 +1,15 @@
 # include <Describe.hpp>
 
-Describe::Describe(string description): _description(description) {}
+size_t	Describe::_numberOfDescriptions = 0;
 
-Describe::~Describe(void) {}
+Describe::Describe(string description): _description(description) {
+	_numberOfDescriptions++;
+	_selfIndex = _numberOfDescriptions;
+}
+
+Describe::~Describe(void) {
+	_numberOfDescriptions--;
+}
 
 string	Describe::getDescription(void) const {
 	return (_description);
@@ -15,7 +22,7 @@ void	Describe::addAssert(Assert &newAssert) {
 void	Describe::runAsserts(void) const {
 	string	tabForDescription = string(2, ' ');
 	string	tabForAssert = string(4, ' ');
-	cout << tabForDescription << _description << endl << endl;
+	cout << tabForDescription << _selfIndex << ". " << _description << endl << endl;
 	for (vector<Assert>::const_iterator it = _asserts.begin(); it != _asserts.end(); it++) {
 		try {
 			it->execute();

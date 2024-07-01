@@ -8,6 +8,8 @@ using namespace std;
 
 class	Describe {
 	private:
+		static size_t		_numberOfDescriptions;
+		size_t				_selfIndex;
 		string				_description;
 		vector<Assert>		_asserts;
 		Describe(void);
